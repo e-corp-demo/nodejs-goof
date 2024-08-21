@@ -11,4 +11,4 @@ jobs:
         continue-on-error: false
         env:
            SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-           SNYK_API: https://api.eu.snyk.io
+           #SNYK_API: https://api.eu.snyk.io
