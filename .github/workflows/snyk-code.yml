@@ -7,7 +7,10 @@ jobs:
       - uses: actions/checkout@v3
       - uses: snyk/actions/setup@master
       - name: Snyk Test
-        run: snyk code test --org=2926939e-40c9-407e-ac64-14137a47b39c
+        run: snyk code test --org=26891985-3294-4d0f-939b-4d1f88b6c892
         continue-on-error: false
         env:
            SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+           API: https://api.eu.snyk.io
+        with:
+          args: --code --org=26891985-3294-4d0f-939b-4d1f88b6c892 -d --API=https://api.eu.snyk.io
