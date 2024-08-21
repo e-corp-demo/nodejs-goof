@@ -12,5 +12,3 @@ jobs:
         env:
            SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
            API: https://api.eu.snyk.io
-        with:
-          args: --code --org=26891985-3294-4d0f-939b-4d1f88b6c892 -d --API=https://api.eu.snyk.io
