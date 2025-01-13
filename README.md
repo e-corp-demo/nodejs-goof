@@ -22,7 +22,7 @@ This will run Goof locally, using a local mongo on the default port and listenin
 
 Note: You *have* to use an old version of MongoDB version due to some of these old libraries' database server APIs. MongoDB 3 is known to work ok.
 
-You can also run the MongoDB server individually via Docker, such as:
+You can also run the MongoDB server individually via Docker, such as below:
 
 ```sh
 docker run --rm -p 27017:27017 mongo:3
