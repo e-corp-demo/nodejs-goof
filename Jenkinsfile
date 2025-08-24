@@ -8,12 +8,6 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                // Checkout your project from Git, GitHub, etc.
-                git 'https://github.com/e-corp-demo/nodejs-goof.git'
-            }
-        }
 
         stage('Install Dependencies') {
             steps {
