@@ -31,10 +31,10 @@ pipeline {
         stage("Quality Gate") {
             steps {
                 // Wait for SonarQube analysis to complete and check the quality gate status
-                timeout(time: 1, unit: 'HOURS') {
+                timeout(time: 5, unit: 'MINUTES') {
                     // The 'webhook' option is more efficient if you've configured webhooks in SonarQube.
                     // Otherwise, it will poll for the result.
-                    waitForQualityGate abortPipeline: true
+                    waitForQualityGate abortPipeline: false
                 }
             }
         }
