@@ -5,6 +5,7 @@ pipeline {
     tools {
         // 'SonarScanner' is the name you gave the tool in Global Tool Configuration
         nodejs 'node18' // Assuming you have a NodeJS tool configured
+        sonarqubeScanner 'SonarScanner' 
     }
 
     stages {
