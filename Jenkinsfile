@@ -22,7 +22,8 @@ pipeline {
                 // configured in Manage Jenkins -> System.
                 withSonarQubeEnv('SonarQube') {
                     // Run the SonarScanner
-                    sh 'sonar-scanner'
+                    // sh 'sonar-scanner'
+                    sh 'npx @sonar/scan'
                 }
             }
         }
