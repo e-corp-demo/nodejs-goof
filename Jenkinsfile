@@ -12,7 +12,7 @@ pipeline {
             steps {
                 // Install project dependencies
                 sh 'npm install'
-                sh 'npm install -D @sonar/scan'
+                // sh 'npm install -D @sonar/scan'
             }
         }
 
