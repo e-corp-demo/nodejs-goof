@@ -4,7 +4,6 @@ pipeline {
     // Define the SonarQube Scanner tool configured in Jenkins
     tools {
         nodejs 'node18'
-        hudson.plugins.sonar.SonarRunnerInstallation 'sonar-scanner'
     }
 
     stages {
@@ -13,6 +12,7 @@ pipeline {
             steps {
                 // Install project dependencies
                 sh 'npm install'
+                sh 'npm install sonar-scanner'
             }
         }
 
