@@ -1,34 +1,30 @@
 pipeline {
-    agent any
+  agent any
 
-    tools {
-        nodejs 'node18'
+  tools {
+    jdk 'JDK17'       // name must match Manage Jenkins > Global Tool Configuration
+    nodejs 'node18'
+  }
+
+  stages {
+    stage('Install Dependencies') {
+      steps { sh 'npm install' }
     }
 
-    stages {
-
-        stage('Install Dependencies') {
-            steps {
-                sh 'npm install'
-            }
+    stage('SonarQube Analysis') {
+      steps {
+        withSonarQubeEnv('SonarQube') {
+          sh 'npx @sonar/scan'
         }
-
-        stage('SonarQube Analysis') {
-            steps {
-                // Matches the name configured in Manage Jenkins -> System
-                withSonarQubeEnv('SonarQube') {
-                    // No OS/arch overrides; let the scanner auto-provision a glibc JRE
-                    sh 'npx @sonar/scan'
-                }
-            }
-        }
-
-        stage('Quality Gate') {
-            steps {
-                timeout(time: 1, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: false
-                }
-            }
-        }
+      }
     }
+
+    stage('Quality Gate') {
+      steps {
+        timeout(time: 1, unit: 'MINUTES') {
+          waitForQualityGate abortPipeline: false
+        }
+      }
+    }
+  }
 }
