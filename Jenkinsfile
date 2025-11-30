@@ -2,7 +2,7 @@ pipeline {
   agent any
   tools {
     jdk 'JDK17'     // must match Manage Jenkins > Global Tool Configuration
-    nodejs 'node18'
+    nodejs 'node25'
   }
   stages {
     stage('Install Dependencies') {
