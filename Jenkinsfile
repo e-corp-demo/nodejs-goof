@@ -12,6 +12,10 @@ pipeline {
     }
 
     stage('SonarQube Analysis') {
+      environment {
+        SONAR_SCANNER_SKIP_JRE_PROVISIONING = 'true'
+        SONAR_SCANNER_JAVA_EXE_PATH = "${env.JAVA_HOME}/bin/java"
+      }
       steps {
         withSonarQubeEnv('SonarQube') {
           sh 'npx @sonar/scan'
