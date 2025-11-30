@@ -17,23 +17,26 @@ pipeline {
         }
 
         stage('SonarQube Analysis') {
+            environment {
+                // Force Alpine-compatible JRE provisioning for the scanner engine
+                SONAR_SCANNER_OS   = 'alpine'
+                // Explicit arch (optional, but set for arm64 runners)
+                SONAR_SCANNER_ARCH = 'aarch64'
+            }
             steps {
-                // The 'SonarQube' part should match the name of your SonarQube server
-                // configured in Manage Jenkins -> System.
+                // The 'SonarQube' name must match your configured server in Manage Jenkins -> System
                 withSonarQubeEnv('SonarQube') {
-                    // Run the SonarScanner
-                    // sh 'sonar-scanner'
+                    // Run the SonarScanner via the NPM bootstrapper
                     sh 'npx @sonar/scan'
                 }
             }
         }
 
-        stage("Quality Gate") {
+        stage('Quality Gate') {
             steps {
                 // Wait for SonarQube analysis to complete and check the quality gate status
                 timeout(time: 1, unit: 'MINUTES') {
-                    // The 'webhook' option is more efficient if you've configured webhooks in SonarQube.
-                    // Otherwise, it will poll for the result.
+                    // If webhooks are configured, this waits efficiently; otherwise it polls
                     waitForQualityGate abortPipeline: false
                 }
             }
